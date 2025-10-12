@@ -4,7 +4,7 @@
 
 **Discovered:** October 12, 2025  
 **Reporter:** Jatin Banga ([GitHub](https://github.com/jatin-dot-py))
-**Severity:** Critical  
+**Severity:** Critical
 
 ---
 
@@ -44,7 +44,7 @@ Instagram's mobile web / smaller viewports rendering path embeds private timelin
 
 **Mechanism:**
 1. Client sends GET request to `instagram.com/<username>` with mobile like headers
-2. Instagram's JS detects small viewport, sets `sec-ch-ua-mobile: ?1` (EXACT HEADERS USED MENTIONED IN poc.py )
+2. Instagram's JS detects small viewport, other parameters, Eg: `sec-ch-ua-mobile: ?1`, `sec-fetch-site': 'none'`, etc... (FOR EXACT HEADERS REFER TO HEADERS USED IN poc.py )
 3. Server sees mobile headers, activates mobile rendering optimization
 4. Server embeds `polaris_timeline_connection` JSON in HTML response
 5. JSON contains complete timeline with CDN URLs to private posts
@@ -62,7 +62,7 @@ Discovered while developing [HttpChain](https://github.com/jatin-dot-py/httpchai
 - Complete Python exploit script
 - Detailed reproduction steps
 - Sample response
-- Link to video: ([Video](https://drive.google.com/file/d/1F386Wky80QQBX35-89tmVljHHap6uBGy/view))
+- Link to video: [Video](https://drive.google.com/file/d/1F386Wky80QQBX35-89tmVljHHap6uBGy/view)
 
 ---
 
@@ -72,7 +72,7 @@ Discovered while developing [HttpChain](https://github.com/jatin-dot-py/httpchai
 - **2025-10-12 ~02:00 IST AM:** Initial discovery
 - **2025-10-12 03:56 AM IST:** Reported to Meta Bug Bounty
 - **2025-10-12 03:56 AM IST:** Confirmation received (Case #1838087146916736)
-- **2025-10-12 04:01 AM IST:** Not Applicable Response Received. They misunderstood the issue as cdn caching(Case #1838087146916736)
+- **2025-10-12 04:01 AM IST:** Not Applicable Response Received. They misunderstood the issue as cdn caching (Case #1838087146916736)
 - **2025-10-12 04:23 AM IST:** Reported to Meta Bug Bounty AGAIN
 - **2025-10-12 04:23 AM IST:** Confirmation received (Case #1838100803582037)
 
