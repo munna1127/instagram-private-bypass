@@ -44,7 +44,7 @@ Instagram's mobile web / smaller viewports rendering path embeds private timelin
 
 **Mechanism:**
 1. Client sends GET request to `instagram.com/<username>` with mobile like headers
-2. Instagram's JS detects small viewport, other parameters, Eg: `sec-ch-ua-mobile: ?1`, `sec-fetch-site': 'none'`, etc... (FOR EXACT HEADERS REFER TO HEADERS USED IN poc.py )
+2. Instagram's JS detects small viewport, other parameters, Eg: `user-agent`, `sec-ch-ua-mobile: ?1`, `sec-fetch-site': 'none'`, etc... (FOR EXACT HEADERS REFER TO HEADERS USED IN poc.py )
 3. Server sees mobile headers, activates mobile rendering optimization
 4. Server embeds `polaris_timeline_connection` JSON in HTML response
 5. JSON contains complete timeline with CDN URLs to private posts
