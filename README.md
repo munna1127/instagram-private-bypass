@@ -58,10 +58,11 @@ Discovered while developing [HttpChain](https://github.com/jatin-dot-py/httpchai
 
 ---
 
-## Proof of Concept
+## Proof of Concept & Video
 - Complete Python exploit script
 - Detailed reproduction steps
 - Sample response
+- Link to video: ([Video](https://drive.google.com/file/d/1F386Wky80QQBX35-89tmVljHHap6uBGy/view))
 
 ---
 
