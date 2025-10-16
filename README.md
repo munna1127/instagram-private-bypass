@@ -75,6 +75,8 @@ Discovered while developing [HttpChain](https://github.com/jatin-dot-py/httpchai
 - **2025-10-12 04:01 AM IST:** Not Applicable Response Received. They misunderstood the issue as cdn caching (Case #1838087146916736)
 - **2025-10-12 04:23 AM IST:** Reported to Meta Bug Bounty AGAIN
 - **2025-10-12 04:23 AM IST:** Confirmation received (Case #1838100803582037)
+- ... More messages (i will add them later)
+- **2025-10-16 18:00 PM IST:** Bug no longer works (Silently patched.)
 
 ---
 
