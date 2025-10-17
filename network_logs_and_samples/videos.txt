@@ -1,0 +1,24 @@
+Video 1: 2025-10-12_PoC_Script_Demonstration.mp4
+Link: https://drive.google.com/file/d/10-3r4aaslkOll1mLMPHFbJV5KxmttIxS/view?usp=drive_link
+Date of Recording: 12 Oct 2025
+Sha256 hash: D2269DF5A5A4CDF6A422ED5CBF5CB98D20182B49C3AF214DD7F92ADFDDA93CA3
+Purpose: Initial POC script and reproduction recording sent to meta.
+
+Video 2: 2025-10-13_test_on_2fa_2fa.mp4
+Link: https://drive.google.com/file/d/1XCE-gcoTnIpBOBKA8xuFRWQfYXLLCY1M/view?usp=drive_link
+Date of Recording: 13 Oct 2025
+Sha256 hash: 29E79C8CE284933E6F77ECA1B45936A57FE3A7B4036BB1F275E5CC8AA6AEA1FA
+Purpose: Meta asked to reproduce on their test account : `2fa_2fa`. Test fails, but still works on another account.
+
+Video 3: 2025-10-14_manual_and_script_reproduction_on_new_account.mp4
+Link: https://drive.google.com/file/d/1vuJCfKsNf7xSwN8KjcBSb0H9GnM8ngWT/view?usp=drive_link
+Date of Recording: 14 Oct 2025
+Sha256 hash: 98AEAEBE80A7FFF1A376A442039A1EA908EAAFBD460E3FF158D98F2B71CEE84A
+Purpose: Meta asked another sample account for testing. 
+
+
+Video 4: 2025-10-16_Patch_Confirmation_Video.mp4
+Link: https://drive.google.com/file/d/1O_Df9defJH0sjeA6Gt3dxiH8Mqa3hz_i/view?usp=drive_link
+Date of Recording: 16 Oct 2025
+Sha256 hash: 15B0AD4F873320CA3FDC1FAD4BE5450E0213B015DA7C6341A1DD9ACA829C71D1
+Purpose: During retesting my script, at 6:pm 16 Oct, 2025 IST, i noticed the poc no longer works. Recorded after that.

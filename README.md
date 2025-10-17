@@ -1,93 +1,45 @@
-# Instagram Private Timeline Bypass
+# Instagram Server-Side Authorization Bypass: Private Timeline Exposure
 
-**Status:** Reported to Meta | Awaiting Resolution
-
-**Discovered:** October 12, 2025  
-**Reporter:** Jatin Banga ([GitHub](https://github.com/jatin-dot-py))
-**Severity:** Critical
-
----
-
-## Responsible Disclosure Notice
-
-This vulnerability has been reported to Meta through their official Bug Bounty program. This repository contains documentation for personal records and is PRIVATE until Meta provides permission for public disclosure.
-
-**Case Number:** 1838100803582037  
-**Report Date:** 2025-10-12 04:23 IST  
-**Status:** Under Review
-
----
+> **Status:** Silently patched by Meta on October 16, 2025. Awaiting official acknowledgment.
 
 ## Summary
 
-A server-side authorization bypass in Instagram's mobile web interface allows unauthenticated users to access the complete timeline (private posts) of ANY private Instagram account through a single GET request.
+This repository documents a critical, server-side authorization bypass vulnerability discovered on Instagram in October 2025. The vulnerability allowed a completely unauthenticated attacker to access the private posts, including direct media URLs, of a significant subset of Instagram's private accounts.
 
-### Impact
+The purpose of this archive is to serve as a complete and factual record of the finding, the professional disclosure process, and the subsequent silent patch by Meta.
 
-- **Affected Accounts:** All private Instagram accounts (~500M+ users)
-- **Attack Complexity:** Trivial (single GET request)
-- **Authentication Required:** None
-- **Detection Probability:** Around Zero/ Very Low (very indistinguishable from normal traffic)
-- **Exploit Availability:** Proof-of-concept available
+## The Vulnerability
 
-### CVSS Score
+The bug was a classic server-side authorization failure. It was not a caching issue. The exploitation was a simple, two-step process:
 
-N/A
+1.  **The Trigger:** An unauthenticated request sent to a private profile URL with a specific set of mobile `User-Agent` headers would trigger an incorrect state on Instagram's servers.
+2.  **The Leak:** Once triggered, the server's HTML response would incorrectly embed a JSON object (`polaris_timeline_connection`) containing the private account's entire timeline of posts, including image and video CDN links.
 
----
+This entire process required **zero authentication** and worked from any IP address. The proof-of-concept script, [`poc.py`](./poc.py), automates this attack.
 
-## Technical Overview
+## Impact and Severity: The Silent Threat
 
-Instagram's mobile web / smaller viewports rendering path embeds private timeline data directly in the HTML response for performance optimization. When specific client hint headers are present, the server includes complete post metadata including direct CDN URLs to private content.
+The true severity of this bug lies in its scale and simplicity.
 
-**Root Cause:** Authorization check missing or bypassed in particular web rendering code path.
+During authorized testing across 7 different private accounts (a mix of aged, new, and test accounts), the vulnerability was **100% reproducible on 2 of them (~28%)**.
 
-**Mechanism:**
-1. Client sends GET request to `instagram.com/<username>` with mobile like headers
-2. Instagram's JS detects small viewport, other parameters, Eg: `user-agent`, `sec-ch-ua-mobile: ?1`, `sec-fetch-site': 'none'`, etc... (FOR EXACT HEADERS REFER TO HEADERS USED IN poc.py )
-3. Server sees mobile headers, activates mobile rendering optimization
-4. Server embeds `polaris_timeline_connection` JSON in HTML response
-5. JSON contains complete timeline with CDN URLs to private posts
-6. **Authorization check never performed**
+While the exact conditions that made an account vulnerable are known only to Meta's engineers, this exploitability rate in a small, controlled sample suggests that the actual number of affected users could easily be in the **millions**.
 
----
+What made this vulnerability particularly dangerous was its simplicity. It could be discovered and reproduced with basic web debugging tools. This low barrier to entry meant that any malicious actor who stumbled upon it could have automated the mass harvesting of private, sensitive user data with minimal effort.
 
-## Discovery Context
+## Chronology of Events
 
-Discovered while developing [HttpChain](https://github.com/jatin-dot-py/httpchain), an HTTP orchestration framework for API/ Data Extraction/ OSINT workflows. The bug was found during systematic analysis of Instagram's web responses.
+A complete, detailed timeline of all events—from initial discovery and a wrongfully rejected first report, to the detailed second report, the back-and-forth with Meta's security team, and the final follow-up—is documented in the master timeline file.
+
+## [View the Full Timeline Here](./TIMELINE.md)
 
 ---
 
-## Proof of Concept & Video
-- Complete Python exploit script
-- Detailed reproduction steps
-- Sample response
-- Link to video: [Video](https://drive.google.com/file/d/1F386Wky80QQBX35-89tmVljHHap6uBGy/view)
+### Evidence and Artifacts
 
----
+This repository contains all the evidence required to validate these findings:
 
-## Timeline
-
-**Key Dates:**
-- **2025-10-12 ~02:00 IST AM:** Initial discovery
-- **2025-10-12 03:56 AM IST:** Reported to Meta Bug Bounty
-- **2025-10-12 03:56 AM IST:** Confirmation received (Case #1838087146916736)
-- **2025-10-12 04:01 AM IST:** Not Applicable Response Received. They misunderstood the issue as cdn caching (Case #1838087146916736)
-- **2025-10-12 04:23 AM IST:** Reported to Meta Bug Bounty AGAIN
-- **2025-10-12 04:23 AM IST:** Confirmation received (Case #1838100803582037)
-- ... More messages (i will add them later)
-- **2025-10-16 18:00 PM IST:** Bug no longer works (Silently patched.)
-
----
-
-## Responsible Disclosure
-
-This vulnerability was disclosed responsibly through Meta's official Bug Bounty program immediately upon discovery. No exploitation beyond ethical testing on researcher's own accounts was performed.
-
----
-
-## Contact
-
-For questions about this disclosure: [redacted until public disclosure]
-
----
+*   [`official_communication/`](./official_communication/): Complete, saved HTML archives of both bug bounty tickets, including the initial incorrect rejection.
+*   [`network_logs_and_samples/`](./network_logs_and_samples/): Raw network logs, response headers (`X-FB-Debug`), sample HTML responses, and extracted JSON data from both vulnerable and non-vulnerable accounts.
+*   [`videos.txt`](./network_logs_and_samples/videos.txt): Links and SHA256 hashes to all video evidence, including the initial PoC, reproduction on a consenting third-party account, and the final video confirming the patch.
+*   [`poc.py`](./poc.py): The exact Python script used to automate the exploit.

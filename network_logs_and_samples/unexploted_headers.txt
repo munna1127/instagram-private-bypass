@@ -1,0 +1,66 @@
+Account 1: 2fa_2fa Test account that meta gave
+Headers:
+{
+      "Vary": "Accept-Encoding",
+      "Content-Encoding": "br",
+      "Set-Cookie": "csrftoken=8K-LwTVVht-ut43m53R_6V; expires=Thu, 19-Nov-2026 10:24:12 GMT; Max-Age=34560000; path=/; domain=.instagram.com; secure; SameSite=None, datr=THbvaEil1ff4ZSdGGa3bW4fk; expires=Thu, 19-Nov-2026 10:24:12 GMT; Max-Age=34560000; path=/; domain=.instagram.com; secure; httponly; SameSite=None, ig_did=ACD24329-C73B-4E3A-A29D-7C8B1356EAF0; expires=Thu, 15-Oct-2026 10:24:12 GMT; Max-Age=31536000; path=/; domain=.instagram.com; secure; httponly; SameSite=None",
+      "accept-ch-lifetime": "4838400",
+      "accept-ch": "viewport-width,dpr,Sec-CH-Prefers-Color-Scheme,Sec-CH-UA-Full-Version-List,Sec-CH-UA-Platform-Version,Sec-CH-UA-Model",
+      "reporting-endpoints": "coop_report=\"https://www.facebook.com/browser_reporting/coop/?minimize=0\", default=\"https://www.instagram.com/error/ig_web_error_reports/?brsid=7561392368504542589&comet_app_key=117&cpp=C3&cv=1028352631&st=1760523852920\", permissions_policy=\"https://www.instagram.com/error/ig_web_error_reports/\"",
+      "report-to": "{\"max_age\":2592000,\"endpoints\":[{\"url\":\"https:\\/\\/www.facebook.com\\/browser_reporting\\/coop\\/?minimize=0\"}],\"group\":\"coop_report\",\"include_subdomains\":true}, {\"max_age\":259200,\"endpoints\":[{\"url\":\"https:\\/\\/www.instagram.com\\/error\\/ig_web_error_reports\\/?brsid=7561392368504542589&comet_app_key=117&cpp=C3&cv=1028352631&st=1760523852920\"}]}, {\"max_age\":21600,\"endpoints\":[{\"url\":\"https:\\/\\/www.instagram.com\\/error\\/ig_web_error_reports\\/\"}],\"group\":\"permissions_policy\"}",
+      "content-security-policy": "default-src *.facebook.com *.fbcdn.net *.instagram.com blob: 'wasm-unsafe-eval';script-src *.instagram.com static.cdninstagram.com *.facebook.com *.fbcdn.net *.facebook.net 127.0.0.1:* 'nonce-JnEpU3LW' blob: 'self' 'wasm-unsafe-eval' https://*.google-analytics.com https://translate.google.com https://apis.google.com https://accounts.google.com;style-src *.instagram.com static.cdninstagram.com data: blob: 'unsafe-inline' *.fbcdn.net *.facebook.com;connect-src *.instagram.com wss://edge-chat.instagram.com connect.facebook.net *.facebook.com facebook.com *.fbcdn.net *.facebook.net wss://*.facebook.com:* ws://localhost:* blob: *.cdninstagram.com wss://*.instagram.com:* 'self' https://meta.privacy-gateway.cloudflare.com/relay;font-src *.instagram.com static.cdninstagram.com data: *.fbcdn.net *.intern.facebook.com *.facebook.com https://fonts.gstatic.com;img-src *.instagram.com *.facebook.com *.fbcdn.net data: *.cdninstagram.com *.whatsapp.net blob: *.fbsbx.com android-webview-video-poster: *.oculuscdn.com *.giphy.com *.tenor.co *.tenor.com www.googleadservices.com *.doubleclick.net *.google.com *.google.co.uk https://www.gstatic.com https://*.google-analytics.com;media-src *.facebook.com *.fbcdn.net *.instagram.com *.cdninstagram.com cdn.fbsbx.com lookaside.fbsbx.com data: blob: https://*.giphy.com *.tenor.co *.tenor.com;child-src *.facebook.com *.fbcdn.net *.instagram.com data: blob:;frame-src *.instagram.com *.facebook.com *.fbsbx.com fbsbx.com data: www.googleadservices.com *.doubleclick.net *.google.com *.google.co.uk;manifest-src *.facebook.com *.fbcdn.net *.instagram.com data: blob:;object-src *.facebook.com *.fbcdn.net *.instagram.com data: blob:;block-all-mixed-content;upgrade-insecure-requests;",
+      "X-Frame-Options": "DENY",
+      "document-policy": "force-load-at-top, include-js-call-stacks-in-crash-reports",
+      "permissions-policy": "accelerometer=(self), attribution-reporting=(), autoplay=(), bluetooth=(), camera=(self), ch-device-memory=(), ch-downlink=(), ch-dpr=(), ch-ect=(), ch-rtt=(), ch-save-data=(), ch-ua-arch=(), ch-ua-bitness=(), ch-viewport-height=(), ch-viewport-width=(), ch-width=(), clipboard-read=(), clipboard-write=(self), compute-pressure=(), display-capture=(self), encrypted-media=(), fullscreen=(self), gamepad=(), geolocation=(self), gyroscope=(self), hid=(), idle-detection=(), interest-cohort=(), keyboard-map=(), local-fonts=(), magnetometer=(), microphone=(self), midi=(), otp-credentials=(), payment=(), picture-in-picture=(self), private-state-token-issuance=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), shared-storage=(), shared-storage-select-url=(), private-state-token-redemption=(), usb=(), unload=(self), window-management=(), xr-spatial-tracking=();report-to=\"permissions_policy\"",
+      "cross-origin-resource-policy": "same-origin",
+      "cross-origin-opener-policy": "same-origin-allow-popups;report-to=\"coop_report\"",
+      "Pragma": "no-cache",
+      "Cache-Control": "private, no-cache, no-store, must-revalidate",
+      "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+      "X-Content-Type-Options": "nosniff",
+      "X-XSS-Protection": "0",
+      "origin-agent-cluster": "?1",
+      "Strict-Transport-Security": "max-age=31536000; preload; includeSubDomains",
+      "x-stack": "www",
+      "Content-Type": "text/html; charset=\"utf-8\"",
+      "X-FB-Debug": "JXMO6+HrXEU4lj9WO8pQqkauuARKv71cK1Cla6aXdrb+MqyjEnTtPTdyuQtv+HSlhO8URTrsTXbRR/K7pEYD2A==",
+      "Date": "Wed, 15 Oct 2025 10:24:13 GMT",
+      "Alt-Svc": "h3=\":443\"; ma=86400",
+      "X-FB-Connection-Quality": "EXCELLENT; q=0.9, rtt=21, rtx=0, c=14, mss=1392, tbw=3745, tp=-1, tpl=-1, uplat=712, ullat=0",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive"
+}
+
+Account 2: anon_hax0r (owned account)
+Headers:
+{
+      "Vary": "Accept-Encoding",
+      "Content-Encoding": "br",
+      "Set-Cookie": "csrftoken=YVSPLnO-BPcYQ-P254azIH; expires=Thu, 19-Nov-2026 10:21:41 GMT; Max-Age=34560000; path=/; domain=.instagram.com; secure; SameSite=None, datr=tXXvaKi-saF_9Ts0suTOhc3T; expires=Thu, 19-Nov-2026 10:21:41 GMT; Max-Age=34560000; path=/; domain=.instagram.com; secure; httponly; SameSite=None, ig_did=748215BF-AA3E-4D95-B613-9CFEE0B835F4; expires=Thu, 15-Oct-2026 10:21:41 GMT; Max-Age=31536000; path=/; domain=.instagram.com; secure; httponly; SameSite=None, ps_l=0; expires=Thu, 19-Nov-2026 10:21:41 GMT; Max-Age=34560000; path=/; domain=.instagram.com; secure; httponly; SameSite=Lax, ps_n=0; expires=Thu, 19-Nov-2026 10:21:41 GMT; Max-Age=34560000; path=/; domain=.instagram.com; secure; httponly; SameSite=None",
+      "accept-ch-lifetime": "4838400",
+      "accept-ch": "viewport-width,dpr,Sec-CH-Prefers-Color-Scheme,Sec-CH-UA-Full-Version-List,Sec-CH-UA-Platform-Version,Sec-CH-UA-Model",
+      "reporting-endpoints": "coop_report=\"https://www.facebook.com/browser_reporting/coop/?minimize=0\", default=\"https://www.instagram.com/error/ig_web_error_reports/?brsid=7561391720133771546&comet_app_key=7&cpp=C3&cv=1028452745&st=1760523701610\", permissions_policy=\"https://www.instagram.com/error/ig_web_error_reports/\"",
+      "report-to": "{\"max_age\":2592000,\"endpoints\":[{\"url\":\"https:\\/\\/www.facebook.com\\/browser_reporting\\/coop\\/?minimize=0\"}],\"group\":\"coop_report\",\"include_subdomains\":true}, {\"max_age\":259200,\"endpoints\":[{\"url\":\"https:\\/\\/www.instagram.com\\/error\\/ig_web_error_reports\\/?brsid=7561391720133771546&comet_app_key=7&cpp=C3&cv=1028452745&st=1760523701610\"}]}, {\"max_age\":21600,\"endpoints\":[{\"url\":\"https:\\/\\/www.instagram.com\\/error\\/ig_web_error_reports\\/\"}],\"group\":\"permissions_policy\"}",
+      "content-security-policy": "default-src *.facebook.com *.fbcdn.net *.instagram.com blob: 'wasm-unsafe-eval';script-src *.instagram.com static.cdninstagram.com *.facebook.com *.fbcdn.net *.facebook.net 127.0.0.1:* 'nonce-85S8LzNk' blob: 'self' 'wasm-unsafe-eval' https://*.google-analytics.com https://translate.google.com https://apis.google.com https://accounts.google.com;style-src *.instagram.com static.cdninstagram.com data: blob: 'unsafe-inline' *.fbcdn.net *.facebook.com;connect-src *.instagram.com wss://edge-chat.instagram.com connect.facebook.net *.facebook.com facebook.com *.fbcdn.net *.facebook.net wss://*.facebook.com:* ws://localhost:* blob: *.cdninstagram.com wss://*.instagram.com:* 'self' https://meta.privacy-gateway.cloudflare.com/relay;font-src *.instagram.com static.cdninstagram.com data: *.fbcdn.net *.intern.facebook.com *.facebook.com https://fonts.gstatic.com;img-src *.instagram.com *.facebook.com *.fbcdn.net data: *.cdninstagram.com *.whatsapp.net blob: *.fbsbx.com android-webview-video-poster: *.oculuscdn.com *.giphy.com *.tenor.co *.tenor.com www.googleadservices.com *.doubleclick.net *.google.com *.google.co.uk https://www.gstatic.com https://*.google-analytics.com;media-src *.facebook.com *.fbcdn.net *.instagram.com *.cdninstagram.com cdn.fbsbx.com lookaside.fbsbx.com data: blob: https://*.giphy.com *.tenor.co *.tenor.com;child-src *.facebook.com *.fbcdn.net *.instagram.com data: blob:;frame-src *.instagram.com *.facebook.com *.fbsbx.com fbsbx.com data: www.googleadservices.com *.doubleclick.net *.google.com *.google.co.uk;manifest-src *.facebook.com *.fbcdn.net *.instagram.com data: blob:;object-src *.facebook.com *.fbcdn.net *.instagram.com data: blob:;block-all-mixed-content;upgrade-insecure-requests;",
+      "X-Frame-Options": "DENY",
+      "document-policy": "force-load-at-top, include-js-call-stacks-in-crash-reports",
+      "permissions-policy": "accelerometer=(self), attribution-reporting=(), autoplay=(), bluetooth=(), camera=(self), ch-device-memory=(), ch-downlink=(), ch-dpr=(), ch-ect=(), ch-rtt=(), ch-save-data=(), ch-ua-arch=(), ch-ua-bitness=(), ch-viewport-height=(), ch-viewport-width=(), ch-width=(), clipboard-read=(), clipboard-write=(self), compute-pressure=(), display-capture=(self), encrypted-media=(), fullscreen=(self), gamepad=(), geolocation=(self), gyroscope=(self), hid=(), idle-detection=(), interest-cohort=(), keyboard-map=(), local-fonts=(), magnetometer=(), microphone=(self), midi=(), otp-credentials=(), payment=(), picture-in-picture=(self), private-state-token-issuance=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), shared-storage=(), shared-storage-select-url=(), private-state-token-redemption=(), usb=(), unload=(self), window-management=(), xr-spatial-tracking=();report-to=\"permissions_policy\"",
+      "cross-origin-resource-policy": "same-origin",
+      "cross-origin-opener-policy": "same-origin-allow-popups",
+      "Pragma": "no-cache",
+      "Cache-Control": "private, no-cache, no-store, must-revalidate",
+      "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+      "X-Content-Type-Options": "nosniff",
+      "X-XSS-Protection": "0",
+      "origin-agent-cluster": "?1",
+      "Strict-Transport-Security": "max-age=31536000; preload; includeSubDomains",
+      "x-stack": "www",
+      "Content-Type": "text/html; charset=\"utf-8\"",
+      "X-FB-Debug": "poTOg3XYjkWJ9KcocEVJTIhjM/y9Olr7q9tjUM43fa8EUc4duK/MWRSnKzks3uyAzstAQ+BCOB/yKo1tieWU7g==",
+      "Date": "Wed, 15 Oct 2025 10:21:41 GMT",
+      "Alt-Svc": "h3=\":443\"; ma=86400",
+      "X-FB-Connection-Quality": "EXCELLENT; q=0.9, rtt=29, rtx=0, c=14, mss=1300, tbw=3745, tp=-1, tpl=-1, uplat=596, ullat=0",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive"
+}
+
