@@ -7,7 +7,7 @@
 
 ## Summary
 
-This document provides a complete chronological record of the discovery, reporting, and eventual silent patching of a critical privacy vulnerability on Instagram. The vulnerability allowed any unauthenticated user to access the private posts, including direct CDN links to media, of any private Instagram account by sending a request with specific mobile headers.
+This document provides a complete chronological record of the discovery, reporting, and eventual silent patching of a critical privacy vulnerability on Instagram. The vulnerability allowed any unauthenticated user to access the private posts, including direct CDN links to media, for subset of private Instagram account by sending a request with specific mobile headers.
 
 All official communication with Meta is archived and can be reviewed in the [`official_communication/`](./official_communication/) directory. All video evidence is detailed in [`videos.txt`](./network_logs_and_samples/videos.txt).
 
