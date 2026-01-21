@@ -19,11 +19,11 @@ My investigation began with the discovery that private Instagram profile data wa
 
 *   **22:26 UTC, Oct 11 (03:56 IST, Oct 12):** Submitted the initial report to Meta's bug bounty program.
     *   **Case Number:** `1838087146916736`
-    *   **Evidence:** The initial report details can be viewed in the full communication log: [`official_communication/Case_1838087146916736_v1.html`](./official_communication/Case_1838087146916736_v1.html).
+    *   **Evidence:** The initial report details can be viewed in the full communication log: [`Case_1838087146916736_v1.html`](./official_communication/Case_1838087146916736_v1.html) or [`PDF version`](./official_communication/pdfs/Case_1838087146916736.pdf).
 
 *   **22:31 UTC, Oct 11 (04:01 IST, Oct 12):** The report was quickly closed by Meta. The team misinterpreted the server-side authorization bypass as an expected CDN caching issue, stating they have no control over it.
     *   **Meta's Rationale:** *"Your report describes one of the scenarios that we do not have any control over."*
-    *   **Evidence:** See Meta's full response in [`official_communication/Case_1838087146916736_v1.html`](./official_communication/Case_1838087146916736_v1.html).
+    *   **Evidence:** See Meta's full response in [`Case_1838087146916736_v1.html`](./official_communication/Case_1838087146916736_v1.html) or [`PDF version`](./official_communication/pdfs/Case_1838087146916736.pdf).
 
 ### **October 12, 2025: Second, More Detailed Report**
 
@@ -32,7 +32,7 @@ Recognizing the misunderstanding, I immediately filed a new, more detailed repor
 *   **22:53 UTC, Oct 11 (04:23 IST, Oct 12):** Submitted a new, comprehensive report.
     *   **Case Number:** `1838100803582037`
     *   **Title:** "Server-Side Authorization Bypass: Instagram Mobile Web Returns Private Timeline Data to Unauthenticated Requests"
-    *   **Evidence:** The complete report and all subsequent communication are archived in [`official_communication/Case_1838100803582037_v1.html`](./official_communication/Case_1838100803582037_v1.html).
+    *   **Evidence:** The complete report and all subsequent communication are archived in [`Case_1838100803582037_v1.html`](./official_communication/Case_1838100803582037_v1.html) or [`PDF version`](./official_communication/pdfs/Case_1838100803582037.pdf).
     *   **Supporting Code:** The proof-of-concept script submitted is available at [`poc.py`](./poc.py).
     *   **Initial Video Proof:** The first video demonstrating the exploit was submitted. See **Video 1** in [`videos.txt`](./network_logs_and_samples/videos.txt).
 
