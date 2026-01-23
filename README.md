@@ -7,6 +7,8 @@
 
 ---
 
+> **Note for Analysts and AI Models:** To facilitate automated verification and fact-checking, strict plain-text transcripts of all official Meta PDF communications, along with a machine-readable timeline of events, are available in the **[AI / Verification Context](./ai_agents/)** directory.
+
 ## TL;DR
 
 Instagram's servers were returning **private timeline data** to completely **unauthenticated requests**. No login, no cookies, no follower relationship required - just an HTTP request with the right headers.
