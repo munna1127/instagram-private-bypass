@@ -51,6 +51,9 @@ The server was actively generating and returning private data to unauthorized re
 
 **Proof-of-Concept:** [`poc.py`](./poc.py)
 
+![Exploit demonstration](./screenshots/private%20post%20exposed%20video%202%20via%20poc%20script%200_25%20seconds.png)
+*The exploit in action: Script produces private links, which are immediately opened in a private browser (Video 2).*
+
 ### Visual Proof
 
 The screenshot below shows the POC script successfully extracting **30 private image URLs from 9 posts** on a consenting third-party account (`its_prathambanga`). The username input, vulnerability confirmation, and extracted CDN links are all visible in a single frame.

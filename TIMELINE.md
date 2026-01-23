@@ -47,6 +47,9 @@ Meta's security team began the triage process, requesting tests on their account
     *   **Screenshot:** POC script output showing "Timeline data not found" on Meta's test account:
         ![POC fails on 2fa_2fa](./screenshots/account_2fa_2fa_poc_script_video_2_timestamp_at_53_seconds.png)
         *Source: Video 2 at 0:53*
+    *   **Screenshot:** Immediate re-test on my own account (`jatin.py`) showing the exploit was still active:
+        ![POC succeeds on jatin.py](./screenshots/private%20post%20exposed%20video%202%20via%20poc%20script%200_25%20seconds.png)
+        *Source: Video 2 at 0:25*
 
 ### **October 14, 2025: Reproducibility Challenge and Breakthrough**
 
