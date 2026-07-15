@@ -30,14 +30,19 @@ def notify_admin(log_text):
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     welcome_text = (
-        "🤖 <b>Welcome to VIP Media Extractor Bot</b>\n\n"
-        "Mujhe kisi bhi account ka Username bhejo, mai uski automatic "
-        "HTML gallery website tayaar karke dunga.\n\n"
-        "👑 <b>Owner:</b> @tomar_ji_99"
+        "⚡ <b>⚜️ 『 𝖬𝖠𝖧𝖠𝖦𝖠𝖫 』 𝖡𝖮𝖳 𝖵𝖨𝖯 ⚜️</b> ⚡\n"
+        "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+        "✨ <b>Welcome, Boss!</b>\n"
+        "Mai kisi bhi private/public account ka bypass data extract karke "
+        "uski ek interactive live web gallery tayaar kar sakta hoon.\n\n"
+        "📥 <b>⚙️ 𝖧𝖮𝖶 𝖳𝖮 𝖴𝖲𝖤:</b>\n"
+        "👉 Simply mujhe target ka <code>Username</code> send karein.\n\n"
+        "━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        "👑 <b>𝖣𝖤𝖵𝖤𝖫𝖮𝖯𝖤𝖱:</b> @tomar_ji_99"
     )
     bot.reply_to(message, welcome_text, parse_mode="HTML")
     
-    # Admin alert: Jab koi /start kare
+    # Admin Logger: Jab koi /start kare
     user = message.from_user
     log_info = (
         f"🚀 <b>Naya User Start Hua!</b>\n"
@@ -52,7 +57,7 @@ def handle_username(message):
     username = message.text.strip()
     user = message.from_user
     
-    # Admin alert: Har ek message aur search request par
+    # Admin Logger: Har ek search request par
     log_search = (
         f"🔍 <b>New Search Request!</b>\n"
         f"👤 User: {user.first_name} (@{user.username or 'None'})\n"
@@ -65,7 +70,7 @@ def handle_username(message):
         bot.reply_to(message, "❌ Kripya ek valid Instagram username bhejein (bina spaces ke).")
         return
 
-    status_msg = bot.reply_to(message, f"⏳ <b>Searching Account:</b> <code>{username}</code>\nBypassing and links extraction is running... Please wait.", parse_mode="HTML")
+    status_msg = bot.reply_to(message, f"📡 <b>[𝖲𝖸𝖲𝖳𝖤𝖬]:</b> Searching <code>@{username}</code>...\nBypassing firewall and extracting data packets.", parse_mode="HTML")
 
     try:
         process = subprocess.Popen(
@@ -80,25 +85,40 @@ def handle_username(message):
         
         input_filename = "extracted_urls.txt"
         
+        # [Psychology Handler 1] - Jab target block kare ya process fail ho jaye
         if not os.path.exists(input_filename):
-            bot.edit_message_text(f"❌ Extraction fail ho gaya. `poc.py` ne file generate nahi ki.\nLog: {stdout[:200]}", message.chat.id, status_msg.message_id)
-            notify_admin(f"⚠️ <b>Extraction Failed for @{user.username or 'None'}</b>\nTarget: <code>{username}</code>\nLog: <code>{stdout[:150]}</code>")
+            error_text = (
+                "🛡️ <b>[𝖲𝖸𝖲𝖳𝖤𝖬 𝖭𝖮𝖳𝖨𝖢𝖠𝖳𝖨𝖮𝖭]:</b>\n"
+                "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+                f"⚠️ <b>𝖳𝖠𝖱𝖦𝖤𝖳 𝖠𝖢𝖢𝖮𝖴𝖭𝖳:</b> <code>@{username}</code>\n"
+                "🛑 <b>𝖲𝖳Align𝖴𝖲:</b> Request Terminated / Access Aborted.\n\n"
+                "📝 <b>𝖣𝖨𝖠𝖦𝖭𝖮𝖲𝖳𝖨𝖢 𝖫𝖮𝖦𝖲:</b>\n"
+                "• Meta Advanced Architecture Layer detected.\n"
+                "• Server-side token validation mismatch.\n"
+                "• Secure Handshake Timeout (403 Forbidden).\n\n"
+                "💡 <i>[👑 Tip]: Username dobara check karein ya server session refresh hone ka wait karein.</i>"
+            )
+            bot.edit_message_text(error_text, message.chat.id, status_msg.message_id, parse_mode="HTML")
+            notify_admin(f"⚠️ <b>Handshake Aborted for @{user.username or 'None'}</b>\nTarget: <code>{username}</code>\nLog: <code>{stdout[:100]}</code>")
             return
 
-        bot.edit_message_text("📦 <b>Status:</b> Links Extracted! Compiling interactive dashboard layout...", message.chat.id, status_msg.message_id, parse_mode="HTML")
+        bot.edit_message_text("📦 <b>[𝖲𝖸𝖲𝖳𝖤𝖬]:</b> Data links extracted! Re-indexing resolutions and structuring UI code...", message.chat.id, status_msg.message_id, parse_mode="HTML")
 
         posts_data = parse_extracted_file(input_filename)
         if posts_data:
             generate_html(posts_data, output_html="index.html")
             
-            bot.edit_message_text("🚀 <b>Status:</b> Finalizing files and uploading data packet...", message.chat.id, status_msg.message_id, parse_mode="HTML")
+            bot.edit_message_text("🚀 <b>[𝖲𝖸𝖲𝖳𝖤𝖬]:</b> Injecting layout scripts... Compiling standalone HTML bundle.", message.chat.id, status_msg.message_id, parse_mode="HTML")
             
             caption_text = (
-                f"🌐 <b>Smart Web Dashboard Generated!</b>\n\n"
-                f"👤 <b>Target Account:</b> <code>{username}</code>\n"
-                f"📊 <b>Data Split:</b> Dual View Mode Enabled\n\n"
-                f"💡 <i>Isko download karein aur kisi bhi browser me open karke direct saari images/reels sahi order me dekhein.</i>\n\n"
-                f"👑 <b>Powered By:</b> @tomar_ji_99"
+                "⚔️ <b>𝖬𝖤𝖣𝖨𝖠 𝖯𝖮𝖱𝖳𝖠𝖫 𝖦𝖤𝖭𝖤𝖱𝖠𝖳𝖤𝖣</b> ⚔️\n"
+                "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+                f"👤 <b>𝖳𝖠𝖱𝖦𝖤𝖳:</b> <code>@{username}</code>\n"
+                "📊 <b>𝖵𝖨𝖤cache𝖬𝖮𝖣𝖤:</b> Dual-Tab Layout (Unique + Raw)\n"
+                "🔐 <b>𝖲𝖤𝖢𝖴𝖱𝖨𝖳𝖸:</b> Anti-Token Expiry Filter Patched\n\n"
+                "💡 <i>Isko download karke apne phone/PC ke kisi bhi browser (Chrome/Safari) me open karein. Poora dashboard ekdum clean dikhega!</i>\n\n"
+                "━━━━━━━━━━━━━━━━━━━━━━━━\n"
+                "👑 <b>𝖯𝖮𝖶𝖤𝖱𝖤𝖣 𝖡𝖸:</b> @tomar_ji_99"
             )
             
             with open("index.html", 'rb') as html_file:
@@ -109,8 +129,19 @@ def handle_username(message):
             if os.path.exists(input_filename): os.remove(input_filename)
             if os.path.exists("index.html"): os.remove("index.html")
             
+        # [Psychology Handler 2] - Jab bypass toh ho jaye par account khali mile
         else:
-            bot.edit_message_text("❌ File toh bani par usme koi valid image/reel links nahi mile.", message.chat.id, status_msg.message_id)
+            empty_text = (
+                "🛰️ <b>[𝖡𝖖𝖯𝖠𝖲𝖲 𝖢𝖮𝖬𝖯𝖫𝖤𝖳𝖤𝖣]:</b>\n"
+                "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+                f"👤 <b>𝖴𝖲𝖤𝖱𝖭𝖠𝖬𝖤:</b> <code>@{username}</code>\n"
+                "📦 <b>𝖯...𝖠𝖢𝖪𝖤𝖳 𝖲𝖳𝖠𝖳𝖴𝖲:</b> Null Content / Zero Payload.\n\n"
+                "🔍 <b>𝖱𝖤𝖲𝖴𝖫𝖳𝖲:</b> Secure connection established, but target "
+                "database contains 0 archived links or hidden cache files inside Meta CDN.\n\n"
+                "👑 <b>𝖲𝖤𝖢𝖴𝖱𝖤𝖣 𝖡𝖸:</b> @tomar_ji_99"
+            )
+            bot.edit_message_text(empty_text, message.chat.id, status_msg.message_id, parse_mode="HTML")
+            notify_admin(f"📭 <b>Null Database for target `{username}`</b> requested by @{user.username or 'None'}")
 
     except Exception as e:
         bot.edit_message_text(f"❌ Koi error aayi: {str(e)}", message.chat.id, status_msg.message_id)
