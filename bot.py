@@ -30,7 +30,7 @@ def notify_admin(log_text):
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     welcome_text = (
-        "⚡ <b>⚜️ 『 𝖬𝖠𝖧𝖠𝖦𝖠𝖫 』 𝖡𝖮𝖳 𝖵𝖨𝖯 ⚜️</b> ⚡\n"
+        "⚡ <b>⚜️ 『 𝖬𝖠𝖧𝖠K𝖠𝖫 』 𝖡𝖮𝖳 𝖵𝖨𝖯 ⚜️</b> ⚡\n"
         "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
         "✨ <b>Welcome, Boss!</b>\n"
         "Mai kisi bhi private/public account ka bypass data extract karke "
