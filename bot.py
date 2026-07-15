@@ -11,8 +11,22 @@ app = Flask(__name__)
 def home():
     return "🌐 Telegram Bot is alive and running on Render Web Service!"
 
+# Environment Variables Config
 BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_TELEGRAM_BOT_TOKEN")
+# Admin ID ko int me convert karte hain safe execution ke liye
+ADMIN_ID = os.getenv("ADMIN_ID")
+if ADMIN_ID:
+    ADMIN_ID = int(ADMIN_ID)
+
 bot = telebot.TeleBot(BOT_TOKEN)
+
+# Helper function jo admin ko notification bhejega
+def notify_admin(log_text):
+    if ADMIN_ID:
+        try:
+            bot.send_message(ADMIN_ID, f"🔔 **[BOT LOGGER]**\n{log_text}", parse_mode="Markdown")
+        except Exception as e:
+            print(f"Admin ko notify karne me dikkat aayi: {e}")
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
@@ -23,10 +37,30 @@ def send_welcome(message):
         "👑 **Owner:** @tomar_ji_99"
     )
     bot.reply_to(message, welcome_text, parse_mode="Markdown")
+    
+    # Admin alert: Jab koi /start kare
+    user = message.from_user
+    log_info = (
+        f"🚀 **Naya User Start Hua!**\n"
+        f"👤 Name: {user.first_name} {user.last_name or ''}\n"
+        f"🆔 User ID: `{user.id}`\n"
+        f"🏷️ Username: @{user.username or 'None'}"
+    )
+    notify_admin(log_info)
 
 @bot.message_handler(func=lambda message: True)
 def handle_username(message):
     username = message.text.strip()
+    user = message.from_user
+    
+    # Admin alert: Har ek message aur search request par
+    log_search = (
+        f"🔍 **New Search Request!**\n"
+        f"👤 User: {user.first_name} (@{user.username or 'None'})\n"
+        f"🆔 ID: `{user.id}`\n"
+        f"📝 Input Text: `{username}`"
+    )
+    notify_admin(log_search)
     
     if " " in username or username.startswith("/"):
         bot.reply_to(message, "❌ Kripya ek valid Instagram username bhejein (bina spaces ke).")
@@ -49,6 +83,7 @@ def handle_username(message):
         
         if not os.path.exists(input_filename):
             bot.edit_message_text(f"❌ Extraction fail ho gaya. `poc.py` ne file generate nahi ki.\nLog: {stdout[:200]}", message.chat.id, status_msg.message_id)
+            notify_admin(f"⚠️ **Extraction Failed for @{user.username or 'None'}**\nTarget: `{username}`\nLog: `{stdout[:150]}`")
             return
 
         bot.edit_message_text("📦 **Status:** Links Extracted! Compiling interactive dashboard layout...", message.chat.id, status_msg.message_id, parse_mode="Markdown")
@@ -59,8 +94,6 @@ def handle_username(message):
             
             bot.edit_message_text("🚀 **Status:** Finalizing files and uploading data packet...", message.chat.id, status_msg.message_id, parse_mode="Markdown")
             
-            # Text file send karne ka code bilkul hata diya hai
-            # Sirf beautiful HTML Dashboard send hoga
             caption_text = (
                 f"🌐 **Smart Web Dashboard Generated!**\n\n"
                 f"👤 **Target Account:** `{username}`\n"
@@ -72,7 +105,9 @@ def handle_username(message):
             with open("index.html", 'rb') as html_file:
                 bot.send_document(message.chat.id, html_file, caption=caption_text, parse_mode="Markdown")
                 
-            # Sab kuch complete hone par local space se saaf kar dete hain files
+            # Success notification to admin
+            notify_admin(f"✅ **Success!** Gallery delivered to @{user.username or 'None'} for target `{username}`.")
+                
             if os.path.exists(input_filename): os.remove(input_filename)
             if os.path.exists("index.html"): os.remove("index.html")
             
@@ -81,9 +116,10 @@ def handle_username(message):
 
     except Exception as e:
         bot.edit_message_text(f"❌ Koi error aayi: {str(e)}", message.chat.id, status_msg.message_id)
+        notify_admin(f"🚨 **System Error!**\nUser: @{user.username or 'None'}\nError: `{str(e)}`")
 
 def run_bot():
-    print("🤖 Telegram Bot thread started...")
+    print("🤖 Telegram Bot thread started with Logger...")
     bot.infinity_polling()
 
 if __name__ == "__main__":
