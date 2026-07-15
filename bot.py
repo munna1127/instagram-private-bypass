@@ -3,6 +3,7 @@ import subprocess
 import threading
 from flask import Flask
 import telebot
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from generate_gallery import parse_extracted_file, generate_html
 
 app = Flask(__name__)
@@ -19,6 +20,17 @@ if ADMIN_ID:
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
+# Verification Settings
+REQUIRED_CHANNELS = [
+    {"chat_id": "@allioneplace", "url": "https://t.me/allioneplace", "name": "💬 Telegram Group"},
+    {"chat_id": "@tech_updates_india0763", "url": "https://t.me/tech_updates_india0763", "name": "📢 Telegram Channel"}
+]
+YOUTUBE_URL = "https://www.youtube.com/@hackeronall"
+
+# Whitelisted Users (No verification needed)
+WHITELISTED_USERS = [1391200164, 6508791739]
+SPECIAL_OWNER_ID = 6508791739
+
 # Helper function to send notifications to the admin (HTML Mode)
 def notify_admin(log_text):
     if ADMIN_ID:
@@ -27,8 +39,64 @@ def notify_admin(log_text):
         except Exception as e:
             print(f"Failed to notify admin: {e}")
 
+# Helper to check if a user has joined the required channels
+def check_membership(user_id):
+    if user_id in WHITELISTED_USERS:
+        return True
+    for channel in REQUIRED_CHANNELS:
+        try:
+            member = bot.get_chat_member(channel["chat_id"], user_id)
+            if member.status in ['left', 'kicked']:
+                return False
+        except Exception:
+            # If bot is not admin in the channel/group, this check might fail.
+            # Make sure to add the bot as administrator in your channels/groups!
+            return False
+    return True
+
+# Helper to generate verification keyboard
+def get_verification_keyboard():
+    markup = InlineKeyboardMarkup()
+    for channel in REQUIRED_CHANNELS:
+        markup.add(InlineKeyboardButton(text=channel["name"], url=channel["url"]))
+    markup.add(InlineKeyboardButton(text="📺 Subscribe YouTube", url=YOUTUBE_URL))
+    markup.add(InlineKeyboardButton(text="✅ Verify Joining", callback_data="verify_join"))
+    return markup
+
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
+    user = message.from_user
+
+    # Admin Logger: When a user triggers /start
+    log_info = (
+        f"🚀 <b>New User Started!</b>\n"
+        f"👤 Name: {user.first_name} {user.last_name or ''}\n"
+        f"🆔 User ID: <code>{user.id}</code>\n"
+        f"🏷️ Username: @{user.username or 'None'}"
+    )
+    notify_admin(log_info)
+
+    # Special welcome greeting for the special owner ID
+    if user.id == SPECIAL_OWNER_ID:
+        owner_welcome = (
+            "👑 <b>Pranam, Aapka swagat hai Owner Sir!</b> 👑\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "Aapka system bilkul taiyar hai. Kisi bhi username par extraction shuru karne ke liye direct input bhejein."
+        )
+        bot.reply_to(message, owner_welcome, parse_mode="HTML")
+        return
+
+    # Normal user/whitelisted check
+    if not check_membership(user.id):
+        verification_text = (
+            "⚠️ <b>ACCESS LOCKED</b> ⚠️\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "Bot ko use karne ke liye aapko hamare official channels ko join aur YouTube ko subscribe karna hoga.\n\n"
+            "Niche diye gaye buttons par click karke join karein aur 'Verify Joining' par click karein."
+        )
+        bot.send_message(message.chat.id, verification_text, reply_markup=get_verification_keyboard(), parse_mode="HTML")
+        return
+
     welcome_text = (
         "⚡ <b>⚜️ 『 𝖬𝖠𝖧𝖠K𝖠𝖫 』 𝖡𝖮𝖳 𝖵𝖨𝖯 ⚜️</b> ⚡\n"
         "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
@@ -41,22 +109,44 @@ def send_welcome(message):
         "👑 <b>𝖣𝖤𝖵𝖤𝖫𝖮𝖯𝖤𝖱:</b> @tomar_ji_99"
     )
     bot.reply_to(message, welcome_text, parse_mode="HTML")
-    
-    # Admin Logger: When a user triggers /start
-    user = message.from_user
-    log_info = (
-        f"🚀 <b>New User Started!</b>\n"
-        f"👤 Name: {user.first_name} {user.last_name or ''}\n"
-        f"🆔 User ID: <code>{user.id}</code>\n"
-        f"🏷️ Username: @{user.username or 'None'}"
-    )
-    notify_admin(log_info)
+
+@bot.callback_query_handler(func=lambda call: call.data == "verify_join")
+def verify_join_callback(call):
+    user_id = call.from_user.id
+    if check_membership(user_id):
+        bot.answer_callback_query(call.id, "✅ Verification Successful! Access Granted.")
+        
+        # Edit the lock message to welcome message
+        welcome_text = (
+            "⚡ <b>⚜️ 『 𝖬𝖠𝖧𝖠K𝖠𝖫 』 𝖡𝖮𝖳 𝖵𝖨𝖯 ⚜️</b> ⚡\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "✨ <b>Welcome, Boss!</b>\n"
+            "I can extract and bypass data from any private or public account "
+            "and generate an interactive live web gallery for it.\n\n"
+            "📥 <b>⚙️ 𝖧𝖮𝖶 𝖳𝖮 𝖴𝖲𝖤:</b>\n"
+            "👉 Simply send me the target's <code>Username</code>.\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "👑 <b>𝖣𝖤𝖵𝖤𝖫𝖮𝖯𝖤𝖱:</b> @tomar_ji_99"
+        )
+        bot.edit_message_text(welcome_text, call.message.chat.id, call.message.message_id, parse_mode="HTML")
+    else:
+        bot.answer_callback_query(call.id, "❌ Aapne sabhi channels join nahi kiye hain. Kripya check karein!", show_alert=True)
 
 @bot.message_handler(func=lambda message: True)
 def handle_username(message):
     username = message.text.strip()
     user = message.from_user
     
+    # Check Verification for all users except whitelisted ones
+    if not check_membership(user.id):
+        verification_text = (
+            "⚠️ <b>ACCESS LOCKED</b> ⚠️\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "Aapne verification complete nahi ki hai. Kripya niche diye gaye links ko join karein."
+        )
+        bot.send_message(message.chat.id, verification_text, reply_markup=get_verification_keyboard(), parse_mode="HTML")
+        return
+
     # Admin Logger: On every search request
     log_search = (
         f"🔍 <b>New Search Request!</b>\n"
@@ -148,7 +238,7 @@ def handle_username(message):
         notify_admin(f"🚨 <b>System Error!</b>\nUser: @{user.username or 'None'}\nError: <code>{str(e)}</code>")
 
 def run_bot():
-    print("🤖 Telegram Bot thread started with HTML Logger...")
+    print("🤖 Telegram Bot thread started with HTML Logger & Force Join...")
     bot.infinity_polling()
 
 if __name__ == "__main__":
