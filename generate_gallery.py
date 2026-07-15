@@ -124,10 +124,21 @@ def generate_html(data_dict, output_html="index.html"):
         header {
             text-align: center;
             margin-bottom: 30px;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
             border-bottom: 1px solid #1e293b;
         }
-        header h1 { margin: 0; font-size: 2.3rem; color: var(--accent); }
+        header h1 { margin: 0; font-size: 2.3rem; color: var(--accent); font-weight: 800; letter-spacing: -0.5px; }
+        .owner-badge {
+            display: inline-block;
+            margin-top: 8px;
+            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+            color: #0b0f19;
+            padding: 5px 16px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
+        }
         
         .tabs-container {
             display: flex;
@@ -146,21 +157,15 @@ def generate_html(data_dict, output_html="index.html"):
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .tab-btn:hover {
-            border-color: var(--accent);
-        }
+        .tab-btn:hover { border-color: var(--accent); }
         .tab-btn.active {
             background-color: var(--accent);
             color: #0b0f19;
             border-color: var(--accent);
             box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
         }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
         .category-section {
             background-color: var(--card-bg);
@@ -198,13 +203,8 @@ def generate_html(data_dict, output_html="index.html"):
             border: 1px solid #334155;
             transition: transform 0.2s, border-color 0.2s;
         }
-        .grid-item:hover {
-            transform: scale(1.04);
-            border-color: var(--accent);
-        }
-        .grid-item img {
-            width: 100%; height: 100%; object-fit: cover; display: block;
-        }
+        .grid-item:hover { transform: scale(1.04); border-color: var(--accent); }
+        .grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .info-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
@@ -223,6 +223,7 @@ def generate_html(data_dict, output_html="index.html"):
     <div class="container">
         <header>
             <h1>Dual-View Media Portal</h1>
+            <div class="owner-badge">⚡ Developed By: @tomar_ji_99</div>
         </header>
 
         <div class="tabs-container">
