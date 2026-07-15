@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "🌐 System Status: Operational. Secure Tunnel Active."
+    return "🌐 SYSTEM STATUS: OPERATIONAL. SECURE BRIDGE ACTIVE."
 
 # Environment Variables Config
 BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_TELEGRAM_BOT_TOKEN")
@@ -20,28 +20,28 @@ if ADMIN_ID:
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
-# Verification Settings
+# Verification Targets
 REQUIRED_CHANNELS = [
-    {"chat_id": "@allioneplace", "url": "https://t.me/allioneplace", "name": "💬 Official Communication Channel"},
-    {"chat_id": "@tech_updates_india0763", "url": "https://t.me/tech_updates_india0763", "name": "📢 Security Update Feed"}
+    {"chat_id": "@allioneplace", "url": "https://t.me/allioneplace", "name": "💬 TELEGRAM GROUP"},
+    {"chat_id": "@tech_updates_india0763", "url": "https://t.me/tech_updates_india0763", "name": "📢 TELEGRAM CHANNEL"}
 ]
 YOUTUBE_URL = "https://www.youtube.com/@hackeronall"
 
-# Whitelisted Entities (High-Level Clearance)
+# Absolute Clearance Level (Bypass Verification entirely)
 WHITELISTED_USERS = [1391200164, 6508791739]
-COMMANDER_ID = 6508791739
+SPECIAL_OWNER_ID = 6508791739
 
-# System Logger (Admin Notification)
+# Encryption Core Audit Logs
 def notify_admin(log_text):
     if ADMIN_ID:
         try:
-            bot.send_message(ADMIN_ID, f"🛡️ <b>[SYSTEM AUDIT LOG]</b>\n{log_text}", parse_mode="HTML")
+            bot.send_message(ADMIN_ID, f"⚡ <b>[CORE AUDIT]</b>\n{log_text}", parse_mode="HTML")
         except Exception as e:
-            print(f"Log transmission failed: {e}")
+            print(f"Audit dump failed: {e}")
 
-# Membership Verification Logic
+# Secure Verification Gate
 def check_membership(user_id):
-    if user_id in WHITELISTED_USERS:
+    if int(user_id) in WHITELISTED_USERS:
         return True
     for channel in REQUIRED_CHANNELS:
         try:
@@ -52,59 +52,64 @@ def check_membership(user_id):
             return False
     return True
 
-# Access Control Interface
+# Premium Terminal Buttons UI
 def get_verification_keyboard():
     markup = InlineKeyboardMarkup()
     for channel in REQUIRED_CHANNELS:
         markup.add(InlineKeyboardButton(text=channel["name"], url=channel["url"]))
-    markup.add(InlineKeyboardButton(text="📺 Subscribe to Intelligence Feed", url=YOUTUBE_URL))
-    markup.add(InlineKeyboardButton(text="✅ Initialize Verification", callback_data="verify_join"))
+    markup.add(InlineKeyboardButton(text="📺 YOUTUBE INTEL FEED", url=YOUTUBE_URL))
+    markup.add(InlineKeyboardButton(text="⚡ INITIALIZE INJECTION ⚡", callback_data="verify_join"))
     return markup
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     user = message.from_user
 
-    # Security Log
+    # Internal Audit Logging
     log_info = (
-        f"🚀 <b>New Connection Established</b>\n"
-        f"👤 Identity: {user.first_name}\n"
+        f"🛰️ <b>Terminal Connection Request</b>\n"
+        f"👤 Agent: {user.first_name}\n"
         f"🆔 UID: <code>{user.id}</code>\n"
         f"🏷️ Handle: @{user.username or 'None'}"
     )
     notify_admin(log_info)
 
-    # Special Access for Commander
-    if user.id == COMMANDER_ID:
+    # 👑 Ultra-Exclusive Welcoming for Owner Sir (Bypasses Everything)
+    if user.id == SPECIAL_OWNER_ID:
         owner_welcome = (
-            "👑 <b>Welcome back, Commander.</b>\n"
-            "━━━━━━━━━━━━━━━━━━━━━━━━\n"
-            "Encryption protocols synchronized. The system is awaiting your command input."
+            "⚡ <b>⚜️ MASTER SYSTEM PANEL ⚜️</b> ⚡\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "👑 <b>Salutations, Owner Sir! Welcome back.</b>\n"
+            "All mainframe safety protocols have been overridden automatically for your presence.\n\n"
+            "📡 <b>CONSOLE READY:</b>\n"
+            "Directly input any target username below to initialize immediate extraction."
         )
         bot.reply_to(message, owner_welcome, parse_mode="HTML")
         return
 
-    # Check Verification Status
+    # Standard User Authorization Check
     if not check_membership(user.id):
         verification_text = (
-            "⚠️ <b>ACCESS DENIED: SECURITY CLEARANCE REQUIRED</b> ⚠️\n"
-            "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-            "Identity validation pending. To authorize access to the data extraction module, "
-            "you must authenticate your status by joining the required intelligence channels."
+            "🔒 <b>MAINFRAME LOCK: AUTHORIZATION REQUIRED</b> 🔒\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "⚡ <b>SECURITY NOTICE:</b>\n"
+            "To access the VIP private data extraction modules, you must authenticate your credentials.\n\n"
+            "👇 <b>ACTIONS REQUIRED:</b>\n"
+            "Join our restricted community channels using the gateway buttons below, then hit <b>Initialize Injection</b> to unlock access."
         )
         bot.send_message(message.chat.id, verification_text, reply_markup=get_verification_keyboard(), parse_mode="HTML")
         return
 
     welcome_text = (
         "⚡ <b>⚜️ 『 𝖬𝖠𝖧𝖠K𝖠𝖫 』 𝖡𝖮𝖳 𝖵𝖨𝖯 ⚜️</b> ⚡\n"
-        "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-        "✨ <b>System Online.</b>\n"
-        "The MAHAKAL data extraction protocol is active. This interface allows for "
-        "the bypass of data restrictions to generate interactive target profiles.\n\n"
-        "📥 <b>⚙️ INSTRUCTIONS:</b>\n"
-        "👉 Input the target's <code>Username</code> to initialize extraction.\n\n"
-        "━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        "👑 <b>AUTHORITY:</b> @tomar_ji_99"
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+        "✨ <b>Welcome, Boss!</b>\n"
+        "Mainframe connection secured. I am programmed to bypass server restrictions, "
+        "extract hidden database layers, and compile private media assets into a pristine live web portal.\n\n"
+        "📥 <b>⚙️ TERMINAL USAGE:</b>\n"
+        "👉 Simply drop the target account's <code>Username</code> into this chat.\n\n"
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        "👑 <b>DEVELOPER MASTER MIND:</b> @tomar_ji_99"
     )
     bot.reply_to(message, welcome_text, parse_mode="HTML")
 
@@ -112,16 +117,16 @@ def send_welcome(message):
 def verify_join_callback(call):
     user_id = call.from_user.id
     if check_membership(user_id):
-        bot.answer_callback_query(call.id, "✅ Identity Verified. Access Authorized.")
+        bot.answer_callback_query(call.id, "⚡ Terminal Access Granted. Core System Unlocked.", show_alert=False)
         welcome_text = (
             "⚡ <b>⚜️ 『 𝖬𝖠𝖧𝖠K𝖠𝖫 』 𝖡𝖮𝖳 𝖵𝖨𝖯 ⚜️</b> ⚡\n"
-            "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-            "✨ <b>System Online.</b>\n"
-            "The MAHAKAL protocol is fully active. Input target credentials to proceed."
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "✨ <b>System Online & Ready!</b>\n"
+            "Authentication successful. Please forward the target's <code>Username</code> to execute the extraction sequence."
         )
         bot.edit_message_text(welcome_text, call.message.chat.id, call.message.message_id, parse_mode="HTML")
     else:
-        bot.answer_callback_query(call.id, "❌ Verification failure. Ensure all protocols are followed.", show_alert=True)
+        bot.answer_callback_query(call.id, "❌ Verification Failure! Protocols missing. Join all channels first.", show_alert=True)
 
 @bot.message_handler(func=lambda message: True)
 def handle_username(message):
@@ -130,25 +135,25 @@ def handle_username(message):
     
     if not check_membership(user.id):
         verification_text = (
-            "⚠️ <b>ACCESS RESTRICTED</b> ⚠️\n"
-            "Authentication incomplete. Perform security verification to bypass restrictions."
+            "🔒 <b>TERMINAL REJECTED</b> 🔒\n"
+            "Authentication required to release data stream. Comply with verification protocols."
         )
         bot.send_message(message.chat.id, verification_text, reply_markup=get_verification_keyboard(), parse_mode="HTML")
         return
 
-    # Data Audit Log
+    # Admin Search Audit Log
     log_search = (
-        f"🔍 <b>New Extraction Request</b>\n"
-        f"👤 User: {user.first_name}\n"
-        f"📝 Target: <code>{username}</code>"
+        f"🔍 <b>Target Injection Initiated</b>\n"
+        f"👤 Operator: {user.first_name}\n"
+        f"📝 Target Node: <code>{username}</code>"
     )
     notify_admin(log_search)
     
     if " " in username or username.startswith("/"):
-        bot.reply_to(message, "❌ Invalid Input. Sanitized format required (no spaces).")
+        bot.reply_to(message, "❌ SYSTEM REJECTION: Sanitized string required. Remove spaces/commands.")
         return
 
-    status_msg = bot.reply_to(message, f"📡 <b>[STATUS]:</b> Establishing handshake with <code>@{username}</code>...\nBypassing firewall and decrypting packets.", parse_mode="HTML")
+    status_msg = bot.reply_to(message, f"📡 <b>[SYSTEM LAYER]:</b> Establishing secure tunnel with <code>@{username}</code>...\nBreaching security protocols & capturing network packets.", parse_mode="HTML")
 
     try:
         process = subprocess.Popen(
@@ -164,63 +169,65 @@ def handle_username(message):
         
         if not os.path.exists(input_filename):
             error_text = (
-                "🛡️ <b>[SECURITY ALERT]:</b>\n"
-                "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-                f"⚠️ <b>TARGET:</b> <code>@{username}</code>\n"
-                "🛑 <b>STATUS:</b> Handshake Terminated.\n\n"
-                "📝 <b>DIAGNOSTIC LOG:</b>\n"
-                "• Advanced Architecture Layer detected.\n"
-                "• Secure Handshake Timeout (403 Forbidden).\n\n"
-                "💡 <i>[👑 Tip]: Validate username accuracy or attempt reconnection later.</i>"
+                "🛡️ <b>[CRITICAL INTERCEPT NOTIFICATION]:</b>\n"
+                "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+                f"⚠️ <b>TARGET ENDPOINT:</b> <code>@{username}</code>\n"
+                "🛑 <b>STATE:</b> Request Denied / Tunnel Collapsed.\n\n"
+                "📝 <b>DIAGNOSTIC BACKLOG:</b>\n"
+                "• Meta Advanced Architecture Firewall detected.\n"
+                "• Dynamic token handshake synchronization failure.\n"
+                "• Secure Socket Layer Timeout (Status 403).\n\n"
+                "💡 <i>[👑 Tip]: Verify username integrity or wait for system session refresh.</i>"
             )
             bot.edit_message_text(error_text, message.chat.id, status_msg.message_id, parse_mode="HTML")
-            notify_admin(f"⚠️ <b>Connection Aborted for @{username}</b>")
+            notify_admin(f"⚠️ <b>Mainframe Handshake Dropped for @{username}</b>")
             return
 
-        bot.edit_message_text("📦 <b>[STATUS]:</b> Data decrypted. Re-indexing resolutions and compiling asset architecture...", message.chat.id, status_msg.message_id, parse_mode="HTML")
+        bot.edit_message_text("📦 <b>[SYSTEM LAYER]:</b> Content arrays captured! Structuring standalone asset code...", message.chat.id, status_msg.message_id, parse_mode="HTML")
 
         posts_data = parse_extracted_file(input_filename)
         if posts_data:
             generate_html(posts_data, output_html="index.html")
-            bot.edit_message_text("🚀 <b>[STATUS]:</b> Layout injection complete. Bundling package...", message.chat.id, status_msg.message_id, parse_mode="HTML")
+            bot.edit_message_text("🚀 <b>[SYSTEM LAYER]:</b> Compiling GUI modules... Injecting dual-tab standalone HTML.", message.chat.id, status_msg.message_id, parse_mode="HTML")
             
             caption_text = (
-                "⚔️ <b>DATA PORTAL ARCHIVE GENERATED</b> ⚔️\n"
-                "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-                f"👤 <b>TARGET:</b> <code>@{username}</code>\n"
-                "📊 <b>FORMAT:</b> Interactive Dashboard\n"
-                "🔐 <b>INTEGRITY:</b> Token Expiry Filter Patched\n\n"
-                "💡 <i>Download the file. Launch in any modern browser for full dashboard functionality.</i>\n\n"
-                "━━━━━━━━━━━━━━━━━━━━━━━━\n"
-                "👑 <b>POWERED BY:</b> @tomar_ji_99"
+                "⚔️ <b>INTELLIGENCE PORTAL GENERATION COMPLETE</b> ⚔️\n"
+                "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+                f"👤 <b>TARGET PROFILE:</b> <code>@{username}</code>\n"
+                "📊 <b>DASHBOARD TYPE:</b> Interactive UI (Dual-Tab Module)\n"
+                "🔐 <b>ENCRYPTION STATUS:</b> Anti-Expiry Link Token Patched\n\n"
+                "💡 <i>Download this compiled interface file and execute it in any web browser (Chrome/Safari) on PC or Mobile for full interactivity.</i>\n\n"
+                "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+                "👑 <b>POWERED BY IMMORTAL CORE:</b> @tomar_ji_99"
             )
             
             with open("index.html", 'rb') as html_file:
                 bot.send_document(message.chat.id, html_file, caption=caption_text, parse_mode="HTML")
                 
-            notify_admin(f"✅ <b>Extraction Success!</b> Target: <code>{username}</code>")
+            notify_admin(f"✅ <b>Mainframe Extraction Success!</b> Node: <code>{username}</code>")
                 
             if os.path.exists(input_filename): os.remove(input_filename)
             if os.path.exists("index.html"): os.remove("index.html")
             
         else:
             empty_text = (
-                "🛰️ <b>[EXTRACTION COMPLETE]:</b>\n"
-                "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-                f"👤 <b>TARGET:</b> <code>@{username}</code>\n"
-                "📦 <b>PACKET STATUS:</b> Zero Payload Detected.\n\n"
-                "🔍 <b>RESULT:</b> Secure link established, but target database returned no archived assets.\n\n"
-                "👑 <b>SYSTEM SECURED BY:</b> @tomar_ji_99"
+                "🛰️ <b>[MAINFRAME BYPASS EXHAUSTED]:</b>\n"
+                "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+                f"👤 <b>TARGET HANDLE:</b> <code>@{username}</code>\n"
+                "📦 <b>PAYLOAD STATUS:</b> Null Sector / Zero Active Files.\n\n"
+                "🔍 <b>ANALYSIS:</b> Secure handshake completed successfully, but target "
+                "database contains exactly 0 media logs inside the network cache.\n\n"
+                "👑 <b>MAINFRAME SIGNATURE:</b> @tomar_ji_99"
             )
             bot.edit_message_text(empty_text, message.chat.id, status_msg.message_id, parse_mode="HTML")
-            notify_admin(f"📭 <b>Null Database for target `{username}`</b>")
+            notify_admin(f"📭 <b>Null Assets found on target node `{username}`</b>")
 
     except Exception as e:
-        bot.edit_message_text(f"❌ Critical System Error: {str(e)}", message.chat.id, status_msg.message_id)
-        notify_admin(f"🚨 <b>System Error!</b>\nError Log: <code>{str(e)}</code>")
+        bot.edit_message_text(f"❌ Mainframe Malfunction: {str(e)}", message.chat.id, status_msg.message_id)
+        notify_admin(f"🚨 <b>Core Kernel Error!</b>\nLog: <code>{str(e)}</code>")
 
 def run_bot():
-    print("🤖 MAHAKAL System Online. Awaiting input.")
+    print("🤖 MAHAKAL Sovereign Kernel Active. Awaiting queries...")
     bot.infinity_polling()
 
 if __name__ == "__main__":
@@ -229,5 +236,5 @@ if __name__ == "__main__":
     bot_thread.start()
     
     port = int(os.environ.get("PORT", 10000))
-    print(f"🚀 Initializing Flask bridge on port {port}...")
+    print(f"🚀 Mainframe web interface online on port {port}...")
     app.run(host='0.0.0.0', port=port)
