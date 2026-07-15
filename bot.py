@@ -98,7 +98,7 @@ def handle_username(message):
                 f"👤 <b>Target Account:</b> <code>{username}</code>\n"
                 f"📊 <b>Data Split:</b> Dual View Mode Enabled\n\n"
                 f"💡 <i>Isko download karein aur kisi bhi browser me open karke direct saari images/reels sahi order me dekhein.</i>\n\n"
-                f"👑 <b>Powered By:</b> @tomar__ji__99"
+                f"👑 <b>Powered By:</b> @tomar_ji_99"
             )
             
             with open("index.html", 'rb') as html_file:
