@@ -13,8 +13,8 @@ def home():
     return "🌐 SYSTEM STATUS: OPERATIONAL. SECURE BRIDGE ACTIVE."
 
 # Environment Variables Config
-BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_TELEGRAM_BOT_TOKEN")
-ADMIN_ID = os.getenv("ADMIN_ID")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "7961855216:AAGkPvn-bLR6PEHN2S4Wi-8wfpTqG8ING5g")
+ADMIN_ID = os.getenv("ADMIN_ID", "6508791739")
 if ADMIN_ID:
     ADMIN_ID = int(ADMIN_ID)
 
@@ -82,7 +82,7 @@ def send_welcome(message):
             "👑 <b>Salutations, Owner Sir! Welcome back.</b>\n"
             "All mainframe safety protocols have been overridden automatically for your presence.\n\n"
             "📡 <b>CONSOLE READY:</b>\n"
-            "Directly input any target username below to initialize immediate extraction."
+            "Directly input target handle using <code>/u username</code> to initialize immediate extraction."
         )
         bot.reply_to(message, owner_welcome, parse_mode="HTML")
         return
@@ -107,7 +107,7 @@ def send_welcome(message):
         "Mainframe connection secured. I am programmed to bypass server restrictions, "
         "extract hidden database layers, and compile private media assets into a pristine live web portal.\n\n"
         "📥 <b>⚙️ TERMINAL USAGE:</b>\n"
-        "👉 Simply drop the target account's <code>Username</code> into this chat.\n\n"
+        "👉 Simply pass the target account's name using <code>/u username</code> inside this chat.\n\n"
         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         "👑 <b>DEVELOPER MASTER MIND:</b> @tomar_ji_99"
     )
@@ -122,15 +122,17 @@ def verify_join_callback(call):
             "⚡ <b>⚜️ 『 𝖬𝖠𝖧𝖠K𝖠𝖫 』 𝖡𝖮𝖳 𝖵𝖨𝖯 ⚜️</b> ⚡\n"
             "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
             "✨ <b>System Online & Ready!</b>\n"
-            "Authentication successful. Please forward the target's <code>Username</code> to execute the extraction sequence."
+            "Authentication successful. Please execute the command <code>/u username</code> to ignite extraction sequence."
         )
         bot.edit_message_text(welcome_text, call.message.chat.id, call.message.message_id, parse_mode="HTML")
     else:
         bot.answer_callback_query(call.id, "❌ Verification Failure! Protocols missing. Join all channels first.", show_alert=True)
 
-@bot.message_handler(func=lambda message: True)
+# 🚀 TARGET FIXED: Script now tracks only explicit command prefixes to prevent spam in groups
+@bot.message_handler(func=lambda message: message.text.startswith('/u '))
 def handle_username(message):
-    username = message.text.strip()
+    # Splits out the command layer cleanly to fetch raw target variable parameters
+    username = message.text.split('/u ', 1)[1].strip()
     user = message.from_user
     
     if not check_membership(user.id):
@@ -145,6 +147,7 @@ def handle_username(message):
     log_search = (
         f"🔍 <b>Target Injection Initiated</b>\n"
         f"👤 Operator: {user.first_name}\n"
+        f"¼ User ID: <code>{user.id}</code>\n"
         f"📝 Target Node: <code>{username}</code>"
     )
     notify_admin(log_search)
